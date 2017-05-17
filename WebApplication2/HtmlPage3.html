@@ -1,0 +1,44 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title></title>
+	<meta charset="utf-8" />
+    <script src="Scripts/jquery-1.10.2.js"></script>
+    <script src="Scripts/jquery.signalR-2.1.2.js"></script>
+    <script src="/signalr/hubs"></script>
+    <script type="text/javascript">
+        $(function () {
+            var chat = $.connection.getMessage;
+            $("#username").html(prompt("请输入用户名称：", ""));
+            $("#message").focus();
+            //启动连接
+            $.connection.hub.start().done(function () {
+                $("#send").click(function () {
+                    var message = $("#username").html() + ":" + $("#message").val();
+                    chat.server.sendMessage(message);
+                    $("#message").val("").focus();
+                });
+            });
+            //注册集线器调用方法
+            chat.client.broadcastMessage = function (msg) {
+                var encodeMsg = $("<div/>").text(msg).html();
+                console.log(encodeMsg);
+                $("#messsagebox").append("<li>" + encodeMsg + "</li>");
+            }
+        });
+    </script>
+</head>
+<body>
+    <div>
+        <div>名称:<p id="username"></p></div>
+        <div style="border-color:red;border:double">
+            <ul id="messsagebox">
+                <li>聊天窗口</li>
+            </ul>
+        </div>
+        <input type="text" value="admin" id="message" />
+        <button id="send">发送</button>
+    </div>
+</body>
+</html>

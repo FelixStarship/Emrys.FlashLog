@@ -1,0 +1,33 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title></title>
+	<meta charset="utf-8" />
+    <script src="Scripts/jquery-1.10.2.js"></script>
+    <script src="Scripts/jquery.signalR-2.1.2.js"></script>
+    <!--<script src="/signalr/hubs"></script>-->
+    <script type="text/javascript">
+        $(function () {
+
+
+            var connection = $.connection("/myconnection")
+            connection.received(function (data) {
+                $("#messages").append("<li>数据：" + data + "</li>");
+            });
+            connection.start().done(function (data) {
+                $("#messages").append("<li>客户端ID："+data.id+"</li>");
+            });
+        });
+            
+            
+       
+    </script>
+</head>
+<body>
+    <input type="text" id="msg" />
+    <input type="button" id="broadcast" value="发送" />
+    <input type="button" id="btnStop" value="停止" />
+    <ul id="messages"></ul>
+</body>
+</html>

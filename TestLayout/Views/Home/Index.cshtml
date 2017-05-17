@@ -1,0 +1,20 @@
+﻿@{
+
+}
+<!--目标页面开始-->
+@section scripts
+{
+    <script type="text/javascript">
+        $(function () {
+            $.get('@Url.Action("RenderPartial", "Home")', { viewName: "Contact" },
+          function (data) {
+              alert(data);
+          }, "json");
+        });
+
+    </script>
+}
+<div>
+    @Page.Name
+</div>
+<!--目标页面结束-->

@@ -1,0 +1,18 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewBag.Title</title>
+</head>
+<body>
+    <div>
+        Home下指定的_Layout
+    </div>
+    <div>
+        @RenderBody()
+    </div>
+</body>
+@Scripts.Render("~/bundles/jquery")
+@RenderSection(name:"scripts",required:false)
+</html>
