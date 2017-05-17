@@ -12,7 +12,7 @@
         var chat;
         var roomcount = 0;
         $(function () {
-            $(function () {
+            
                 chat = $.connection.groupsHub;
                 chat.client.showMessage = function (Message)
                 {
@@ -63,7 +63,7 @@
                     });
                 });
             });
-        });
+       
 
         function SendMessage(btn)
         {
